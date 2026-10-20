@@ -131,24 +131,33 @@ window.LoomelleEnhancements.start({cat,reduced,matData,a});
 // Content stays visible even when animation or observer APIs are unavailable.
 function revealContent(){
  if(reduced||!('IntersectionObserver' in window)||!Element.prototype.animate)return;
- const candidates=[...document.querySelectorAll('#main [data-reveal], #main .section > .container > *, #footer > .container')];
+ const candidates=[...new Set([...document.querySelectorAll('#main [data-reveal], #main .section:not(.hero) > .container > *, #footer > .container')].flatMap(el=>
+  el.matches('.split, .editorial-grid, .contact-grid, .textile-story-grid')?[...el.children]:[el]
+ ))];
  // Animate a block once; nested reveals otherwise compound opacity and movement.
  const blocks=candidates.filter(el=>!candidates.some(parent=>parent!==el&&parent.contains(el)));
+ const animations=new WeakMap();
  const observer=new IntersectionObserver(entries=>{
   entries.forEach(({target,isIntersecting})=>{
    if(!isIntersecting)return;
    observer.unobserve(target);
-   target.animate([
-    {opacity:.65,transform:'translateY(12px)'},
-    {opacity:1,transform:'translateY(0)'}
-   ],{duration:460,easing:'cubic-bezier(.22,1,.36,1)'});
+   animations.get(target)?.play();
   });
- },{rootMargin:'0px 0px 80px 0px',threshold:0});
- blocks.forEach(el=>observer.observe(el));
- document.querySelectorAll('#main img').forEach(image=>{
-  if(!image.complete)image.addEventListener('load',()=>{
-   image.animate([{opacity:.65},{opacity:1}],{duration:280,easing:'ease-out'});
-  },{once:true});
+ },{rootMargin:'0px 0px -40px 0px',threshold:0});
+ blocks.forEach(el=>{
+  // Prepare before observing so offscreen content waits for its entrance.
+  const index=blocks.filter(block=>block.parentElement===el.parentElement).indexOf(el);
+  const animation=el.animate([
+   {opacity:0,transform:'translateY(28px)'},
+   {opacity:1,transform:'translateY(0)'}
+  ],{duration:850,delay:Math.min(index,2)*100,easing:'cubic-bezier(.22,1,.36,1)',fill:'both'});
+  animation.pause();
+  animation.currentTime=0;
+  animation.onfinish=()=>animation.cancel();
+  animations.set(el,animation);
+  observer.observe(el);
+  // Keyboard navigation should reveal a focused block immediately.
+  el.addEventListener('focusin',()=>{observer.unobserve(el);animation.cancel();});
  });
 }
 revealContent();
