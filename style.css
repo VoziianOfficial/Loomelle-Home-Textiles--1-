@@ -44,3 +44,21 @@ html:not(.motion-ready) [data-aos]{opacity:1;transform:none}
 .rubik-hero .cube-stage .swiper{height:550px}.rubik-hero .face-main h1,.rubik-hero .face-main h2{font-size:clamp(48px,5.2vw,82px);line-height:.98}.rubik-hero .face-main{padding:15px 0}.rubik-hero .text-face{padding:28px 32px}.rubik-hero .face-main>p:first-of-type{margin:20px auto}.rubik-hero .face-top{flex:none}.rubik-hero .face-bottom{flex:none}.rubik-hero .face-main .hero-small-note{opacity:1}
 @media(max-width:900px){.rubik-hero .cube-stage .swiper{height:530px}.rubik-hero .text-face{padding:23px}.rubik-hero .face-main h1,.rubik-hero .face-main h2{font-size:clamp(38px,5.6vw,53px)}}
 @media(max-width:600px){.rubik-hero .text-stage .swiper{height:480px}.rubik-hero .photo-stage .swiper{height:345px}.rubik-hero .face-main h1,.rubik-hero .face-main h2{font-size:clamp(43px,10.8vw,62px)}.rubik-hero .text-face{padding:22px 23px}.rubik-hero .face-main{padding:8px 0}}
+
+/* Warm, tactile carousel controls. */
+.rubik-hero .face-main .hero-small-note{font-size:12px!important;line-height:1.65;max-width:390px;color:#493321;text-wrap:pretty}
+.rubik-hero .tone-olive .face-main .hero-small-note{color:#fff9e8}
+.rubik-hero .face-bottom{width:100%;justify-content:center;gap:12px;padding-top:17px;border-top:1px solid #49332133;font-size:12px;line-height:1.5;letter-spacing:.015em;opacity:1;color:#493321}
+.rubik-hero .tone-olive .face-bottom{color:#fff9e8;border-top-color:#fff9e83d}
+.rubik-hero .mini-thread{width:24px;flex:none;border-top:1px solid currentColor}
+@media(max-width:600px){.rubik-hero .face-main .hero-small-note{font-size:11px!important;max-width:300px}.rubik-hero .face-bottom{font-size:11px;padding-top:14px;gap:9px}}
+.rubik-controls .cube-actions{min-width:0;display:inline-flex;align-items:center;gap:6px;padding:6px;border:1px solid #dfd4c2;border-radius:999px;background:#f0e9dd;box-shadow:inset 0 1px 0 #fffaf1,0 4px 12px #493b2308}
+.rubik-controls .cube-actions button{display:grid;place-items:center;flex:none;width:44px;height:44px;padding:0;border:1px solid transparent;border-radius:50%;background:transparent;color:#5d5142;box-shadow:none;transition:background .22s,color .22s,box-shadow .22s,transform .22s}
+.rubik-controls .cube-actions .ui-icon{width:19px;height:19px;stroke-width:1.5;transition:transform .22s}
+.rubik-controls .cube-actions .cube-play{background:var(--rust);color:#fff8ec;border-color:#8b452c;box-shadow:inset 0 1px 0 #ffffff26,0 3px 7px #75402a1c}
+.rubik-controls .cube-actions .cube-play[aria-pressed=true]{background:#fffaf1;color:var(--rust);border-color:#d9c4ac;box-shadow:0 2px 5px #493b2308}
+@media(hover:hover){.rubik-controls .cube-actions button:hover{background:#fffaf1;color:var(--rust);box-shadow:0 2px 7px #493b2310}.rubik-controls .cube-actions .cube-prev:hover .ui-icon{transform:translateX(-2px)}.rubik-controls .cube-actions .cube-next:hover .ui-icon{transform:translateX(2px)}.rubik-controls .cube-actions .cube-play:hover{background:#7d3d27;color:#fff8ec;border-color:#7d3d27}}
+.rubik-controls .cube-actions button:active{transform:scale(.94);box-shadow:none}
+.rubik-controls .cube-actions button:focus-visible{outline:2px solid var(--rust);outline-offset:3px}
+@media(max-width:600px){.rubik-controls .cube-actions{gap:2px;padding:4px}.rubik-controls .cube-actions button{width:44px;height:44px}.rubik-controls .cube-actions .ui-icon{width:18px;height:18px}}
+@media(prefers-reduced-motion:reduce){.rubik-controls .cube-actions button,.rubik-controls .cube-actions .ui-icon{transition:none}.rubik-controls .cube-actions button:active,.rubik-controls .cube-actions button:hover .ui-icon{transform:none}}
